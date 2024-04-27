@@ -1,0 +1,40 @@
+@baseuri = http://localhost:3000
+
+
+// GET /posts
+
+GET {{baseuri}}/posts
+Accept: application/json
+
+###
+
+
+// GET /posts/1
+
+GET {{baseuri}}/posts/1
+Accept: application/json
+
+###
+
+
+// POST /posts
+
+POST {{baseuri}}/posts
+Content-Type: application/json
+
+{
+  "post": {
+    "title": "My first post",
+    "body": "This is my first post"
+  }
+}
+
+###
+
+
+// DELETE /posts/:id
+
+DELETE {{baseuri}}/posts/ea35
+Accept: application/json
+
+###
