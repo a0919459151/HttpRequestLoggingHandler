@@ -5,15 +5,17 @@ namespace HttpRequestLoggingHandler.Clients.Common;
 
 public abstract class HttpClientBase
 {
-    private readonly JsonSerializerOptions _jsonSerializerOptions;
-    private readonly IHttpClientFactory _httpClientFactory;
     private readonly string _httpClientName;
+    
+    private readonly IHttpClientFactory _httpClientFactory;
+
+    protected JsonSerializerOptions JsonSerializerOptions { get; set; }
 
     protected HttpClientBase(
-        IHttpClientFactory httpClientFactory,
-        string httpClientName)
+        string httpClientName,
+        IHttpClientFactory httpClientFactory)
     {
-        _jsonSerializerOptions = new JsonSerializerOptions
+        JsonSerializerOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
@@ -37,7 +39,7 @@ public abstract class HttpClientBase
         if (response.IsSuccessStatusCode)
         {
             var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(content, _jsonSerializerOptions) ?? throw new HttpRequestException("Response content is null.");
+            return JsonSerializer.Deserialize<T>(content, JsonSerializerOptions) ?? throw new HttpRequestException("Response content is null.");
         }
         else
         {
@@ -59,7 +61,7 @@ public abstract class HttpClientBase
         if (response.IsSuccessStatusCode)
         {
             var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<T>(responseContent, _jsonSerializerOptions) ?? throw new HttpRequestException("Response content is null.");
+            return JsonSerializer.Deserialize<T>(responseContent, JsonSerializerOptions) ?? throw new HttpRequestException("Response content is null.");
         }
         else
         {

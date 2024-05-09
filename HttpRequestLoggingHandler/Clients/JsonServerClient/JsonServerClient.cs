@@ -10,9 +10,8 @@ public class JsonServerClient : HttpClientBase, IJsonServerClient
     public static readonly string BaseUrl_Prod = "http://httprequestlogging";
 
     public JsonServerClient(
-        IHttpClientFactory httpClientFactory,
-        IConfiguration configuration) 
-        : base(httpClientFactory, HttpClientName)
+        IHttpClientFactory httpClientFactory) 
+        : base(HttpClientName, httpClientFactory)
     {
     }
 

@@ -2,7 +2,7 @@
 
 public class CreatePostRequestDto
 {
-    public CreatePostResponseDto Post { get; set; } = null!;
+    public CreatePostDto Post { get; set; } = null!;
 }
 
 

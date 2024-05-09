@@ -16,29 +16,31 @@ public class HttpClientLogHandler<T>
     {
         try
         {
-            var response = await base.SendAsync(request, cancellationToken);
+            var a = await request.Content.ReadAsStringAsync();
 
-            var apiLog = new T()
+            var apiLog = new T
             {
-                Id = 0,
-                Method = request.Method.Method,
+                Method = request.Method.ToString(),
                 RequestUri = request.RequestUri?.ToString(),
-                RequestHeaders = request.Headers.ToString(),
+                RequestHeaders = request.Content?.Headers.ToString(),
                 RequestBody = request.Content != null ? await request.Content.ReadAsStringAsync() : null,
-                StatusCode = (int)response.StatusCode,
-                ResponseHeaders = response.Headers.ToString(),
-                ResponseBody = response.Content != null ? await response.Content.ReadAsStringAsync() : null,
-                RequestAt = DateTime.UtcNow,
-                ResponseAt = DateTime.UtcNow
+                RequestAt = DateTime.UtcNow
             };
 
-            _dbContext.Set<T>().Add(apiLog);
+            var response = await base.SendAsync(request, cancellationToken);
+
+            apiLog.StatusCode = (int)response.StatusCode;
+            apiLog.ResponseHeaders = response.Content.Headers.ToString();
+            apiLog.ResponseBody = response.Content != null ? await response.Content.ReadAsStringAsync() : null;
+            apiLog.ResponseAt = DateTime.Now;
+
+            await _dbContext.Set<T>().AddAsync(apiLog);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return response;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             throw;
         }

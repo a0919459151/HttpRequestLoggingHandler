@@ -4,7 +4,20 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static void AddServices(this IServiceCollection services)
+    public static IServiceCollection AddDbContext(this IServiceCollection services)
+    {
+        var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options.UseSqlServer(connectionString);
+        });
+
+        return services;
+    }
+
+    public static IServiceCollection AddServices(this IServiceCollection services)
     {
         var assembly = Assembly.GetEntryAssembly() ?? throw new Exception("Entry assembly not found");
         var types = assembly.GetTypes()
@@ -19,5 +32,7 @@ public static class DependencyInjection
             if (interfaceType == null) continue;
             services.AddScoped(interfaceType, type);
         }
+
+        return services;
     }
 }

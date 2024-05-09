@@ -38,7 +38,10 @@ public class PostService : IPostService
     // CreatePost
     public async Task<CreatePostResponseDto> CreatePost(CreatePostRequestDto request)
     {
-        var apiRequest = request.Adapt<HttpRequestLoggingHandler.Clients.JsonServerClient.Dtos.CreatePostRequestDto>();
+        var apiRequest = new HttpRequestLoggingHandler.Clients.JsonServerClient.Dtos.CreatePostRequestDto()
+        {
+            Post = request.Adapt<HttpRequestLoggingHandler.Clients.JsonServerClient.Dtos.CreatePostDto>()
+        };
 
         var apiResponse = await _jsonServerClient.CreatePostAsync(apiRequest);
 

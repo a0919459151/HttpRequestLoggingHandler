@@ -12,7 +12,7 @@ public abstract class HttpClientLog
     public string? RequestUri { get; set; }
 
     // Request headers
-    public string? ResponseHeaders { get; set; }
+    public string? RequestHeaders { get; set; }
 
     // Request body
     public string? RequestBody { get; set; }
@@ -21,7 +21,7 @@ public abstract class HttpClientLog
     public int? StatusCode { get; set; }
 
     // Response headers
-    public string? RequestHeaders { get; set; }
+    public string? ResponseHeaders { get; set; }
 
     // Response body
     public string? ResponseBody { get; set; }

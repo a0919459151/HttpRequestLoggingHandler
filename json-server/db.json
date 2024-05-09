@@ -9,6 +9,68 @@
       "id": "2",
       "title": "another title",
       "views": 200
+    },
+    {
+      "id": "f476",
+      "Post": null
+    },
+    {
+      "id": "1eab",
+      "Post": null
+    },
+    {
+      "id": "99e3",
+      "Post": null
+    },
+    {
+      "id": "fc61",
+      "Post": null
+    },
+    {
+      "id": "9b31",
+      "post": {
+        "title": "My first post",
+        "body": "This is my first post"
+      }
+    },
+    {
+      "id": "6ab5",
+      "Post": null
+    },
+    {
+      "id": "caea",
+      "Post": null
+    },
+    {
+      "id": "15b4",
+      "Post": null
+    },
+    {
+      "id": "b5dd",
+      "Post": null
+    },
+    {
+      "id": "4fc6",
+      "Post": null
+    },
+    {
+      "id": "ce6e",
+      "Post": null
+    },
+    {
+      "id": "a1ef",
+      "Post": null
+    },
+    {
+      "id": "8cb3",
+      "Post": null
+    },
+    {
+      "id": "d506",
+      "Post": {
+        "Title": "New Post",
+        "Body": "This is a new post"
+      }
     }
   ],
   "comments": [
